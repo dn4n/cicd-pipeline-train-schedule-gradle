@@ -1,0 +1,201 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 65536 bytes for committing reserved memory.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_linux.cpp:2763), pid=2095, tid=0x00007f9e10821700
+#
+# JRE version: OpenJDK Runtime Environment (8.0_252-b09) (build 1.8.0_252-b09)
+# Java VM: OpenJDK 64-Bit Server VM (25.252-b09 mixed mode linux-amd64 compressed oops)
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f9e0c10a000):  JavaThread "C2 CompilerThread0" daemon [_thread_in_vm, id=2112, stack(0x00007f9e10722000,0x00007f9e10822000)]
+
+Stack: [0x00007f9e10722000,0x00007f9e10822000],  sp=0x00007f9e1081d620,  free space=1005k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xadf8ed]  VMError::report_and_die()+0x15d
+V  [libjvm.so+0x4f4c6a]  report_vm_out_of_memory(char const*, int, unsigned long, VMErrorType, char const*)+0xaa
+V  [libjvm.so+0x8c32f8]  os::pd_commit_memory(char*, unsigned long, unsigned long, bool)+0xd8
+V  [libjvm.so+0x8ba5fe]  os::commit_memory(char*, unsigned long, unsigned long, bool)+0x2e
+V  [libjvm.so+0xadc574]  VirtualSpace::expand_by(unsigned long, bool)+0x1b4
+V  [libjvm.so+0x601d6c]  CodeHeap::expand_by(unsigned long)+0x6c
+V  [libjvm.so+0x47c4d6]  CodeCache::allocate(int, bool)+0x46
+V  [libjvm.so+0x47659b]  BufferBlob::create(char const*, int)+0x8b
+V  [libjvm.so+0x47b0a1]  CodeBuffer::initialize(int, int)+0x21
+V  [libjvm.so+0x8d4712]  Compile::init_buffer(unsigned int*)+0x212
+V  [libjvm.so+0x8dbeb1]  Compile::Output()+0x351
+V  [libjvm.so+0x49eed5]  Compile::Code_Gen()+0x415
+V  [libjvm.so+0x4a00ee]  Compile::Compile(ciEnv*, C2Compiler*, ciMethod*, int, bool, bool, bool)+0x115e
+V  [libjvm.so+0x3f7e08]  C2Compiler::compile_method(ciEnv*, ciMethod*, int)+0x1d8
+V  [libjvm.so+0x4a9406]  CompileBroker::invoke_compiler_on_method(CompileTask*)+0x996
+V  [libjvm.so+0x4aa33a]  CompileBroker::compiler_thread_loop()+0x56a
+V  [libjvm.so+0xa893f2]  JavaThread::thread_main_inner()+0x212
+V  [libjvm.so+0x8c0402]  java_start(Thread*)+0xf2
+C  [libpthread.so.0+0x7ea5]  start_thread+0xc5
+
+
+Current CompileTask:
+C2: 491886 1101       4       java.lang.Integer::toString (48 bytes)
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f9e0c80b000 JavaThread "Forward input" [_thread_blocked, id=2125, stack(0x00007f9de94b1000,0x00007f9de95b2000)]
+  0x00007f9e0c807800 JavaThread "DisconnectableInputStream source reader" daemon [_thread_in_native, id=2124, stack(0x00007f9de95b2000,0x00007f9de96b3000)]
+  0x00007f9e0c710000 JavaThread "pool-1-thread-1" [_thread_in_vm, id=2116, stack(0x00007f9dfc091000,0x00007f9dfc192000)]
+  0x00007f9e0c119000 JavaThread "Service Thread" daemon [_thread_blocked, id=2114, stack(0x00007f9e1051f000,0x00007f9e10620000)]
+  0x00007f9e0c116000 JavaThread "C1 CompilerThread1" daemon [_thread_in_vm, id=2113, stack(0x00007f9e10621000,0x00007f9e10721000)]
+=>0x00007f9e0c10a000 JavaThread "C2 CompilerThread0" daemon [_thread_in_vm, id=2112, stack(0x00007f9e10722000,0x00007f9e10822000)]
+  0x00007f9e0c108000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=2111, stack(0x00007f9e10822000,0x00007f9e10923000)]
+  0x00007f9e0c0da000 JavaThread "Finalizer" daemon [_thread_blocked, id=2110, stack(0x00007f9e10923000,0x00007f9e10a24000)]
+  0x00007f9e0c0d5800 JavaThread "Reference Handler" daemon [_thread_blocked, id=2109, stack(0x00007f9e10a24000,0x00007f9e10b25000)]
+  0x00007f9e0c04b800 JavaThread "main" [_thread_in_native, id=2107, stack(0x00007f9e14ad0000,0x00007f9e14bd0000)]
+
+Other Threads:
+  0x00007f9e0c0cb800 VMThread [stack: 0x00007f9e10b26000,0x00007f9e10c26000] [id=2108]
+  0x00007f9e0c11c000 WatcherThread [stack: 0x00007f9e1041f000,0x00007f9e1051f000] [id=2115]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007f9e0c048030] CodeCache_lock - owner thread: 0x00007f9e0c10a000
+[0x00007f9e0c0496b0] Compile_lock - owner thread: 0x00007f9e0c116000
+[0x00007f9e0c0497b0] MethodCompileQueue_lock - owner thread: 0x00007f9e0c116000
+
+heap address: 0x00000000f0e00000, size: 242 MB, Compressed Oops mode: 32-bit
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x0000000100000000
+
+Heap:
+ def new generation   total 4928K, used 2062K [0x00000000f0e00000, 0x00000000f1350000, 0x00000000f5ea0000)
+  eden space 4416K,  46% used [0x00000000f0e00000, 0x00000000f0fffaa8, 0x00000000f1250000)
+  from space 512K,   3% used [0x00000000f12d0000, 0x00000000f12d4038, 0x00000000f1350000)
+  to   space 512K,   0% used [0x00000000f1250000, 0x00000000f1250000, 0x00000000f12d0000)
+ tenured generation   total 10944K, used 3543K [0x00000000f5ea0000, 0x00000000f6950000, 0x0000000100000000)
+   the space 10944K,  32% used [0x00000000f5ea0000, 0x00000000f6215fd0, 0x00000000f6216000, 0x00000000f6950000)
+ Metaspace       used 11158K, capacity 11464K, committed 11520K, reserved 1058816K
+  class space    used 1380K, capacity 1496K, committed 1536K, reserved 1048576K
+
+Card table byte_map: [0x00007f9e14a0c000,0x00007f9e14a86000] byte_map_base: 0x00007f9e14285000
+
+Polling page: 0x00007f9e14bdc000
+
+CodeCache: size=245760Kb used=3447Kb max_used=3447Kb free=242312Kb
+ bounds [0x00007f9dfd000000, 0x00007f9dfd360000, 0x00007f9e0c000000]
+ total_blobs=1395 nmethods=1049 adapters=258
+ compilation: enabled
+
+Compilation events (250 events):
+Event: 19.110 Thread 0x00007f9e0c116000 nmethod 927 0x00007f9dfd30a750 code [0x00007f9dfd30a980, 0x00007f9dfd30b4f8]
+Event: 19.129 Thread 0x00007f9e0c116000  928       3       org.gradle.internal.logging.console.BuildStatusRenderer::onOutput (151 bytes)
+Event: 19.208 Thread 0x00007f9e0c116000 nmethod 928 0x00007f9dfd30be10 code [0x00007f9dfd30c100, 0x00007f9dfd30da28]
+Event: 19.208 Thread 0x00007f9e0c116000  929       3       org.gradle.internal.logging.console.WorkInProgressRenderer::onOutput (53 bytes)
+Event: 19.208 Thread 0x00007f9e0c116000 nmethod 929 0x00007f9dfd309dd0 code [0x00007f9dfd309f80, 0x00007f9dfd30a598]
+Event: 19.453 Thread 0x00007f9e0c116000  931       3       java.nio.Buffer::<init> (121 bytes)
+Event: 19.558 Thread 0x00007f9e0c10a000 nmethod 930 0x00007f9dfd309090 code [0x00007f9dfd309240, 0x00007f9dfd309988]
+Event: 19.562 Thread 0x00007f9e0c116000 nmethod 931 0x00007f9dfd30f490 code [0x00007f9dfd30f760, 0x00007f9dfd310bc8]
+Event: 19.580 Thread 0x00007f9e0c116000  932       3       java.nio.Buffer::remaining (10 bytes)
+Event: 19.587 Thread 0x00007f9e0c116000 nmethod 932 0x00007f9dfd30f190 code [0x00007f9dfd30f2e0, 0x00007f9dfd30f430]
+Event: 19.680 Thread 0x00007f9e0c116000  933       3       com.google.common.collect.FluentIterable::<init> (10 bytes)
+Event: 19.680 Thread 0x00007f9e0c116000 nmethod 933 0x00007f9dfd30ed90 code [0x00007f9dfd30ef00, 0x00007f9dfd30f0d0]
+Event: 19.880 Thread 0x00007f9e0c116000  934       3       java.lang.AbstractStringBuilder::insert (85 bytes)
+Event: 19.904 Thread 0x00007f9e0c116000 nmethod 934 0x00007f9dfd311550 code [0x00007f9dfd311760, 0x00007f9dfd3121f8]
+Event: 19.907 Thread 0x00007f9e0c116000  935       3       org.gradle.internal.logging.console.DefaultRedrawableLabel::setText (6 bytes)
+Event: 19.907 Thread 0x00007f9e0c116000 nmethod 935 0x00007f9dfd30ea50 code [0x00007f9dfd30eba0, 0x00007f9dfd30ed10]
+Event: 19.907 Thread 0x00007f9e0c116000  936       3       org.fusesource.jansi.Ansi::fg (17 bytes)
+Event: 19.908 Thread 0x00007f9e0c116000 nmethod 936 0x00007f9dfd312650 code [0x00007f9dfd312840, 0x00007f9dfd3131a8]
+Event: 19.908 Thread 0x00007f9e0c116000  937       3       org.fusesource.jansi.Ansi$Color::fg (8 bytes)
+Event: 19.908 Thread 0x00007f9e0c116000 nmethod 937 0x00007f9dfd30e710 code [0x00007f9dfd30e860, 0x00007f9dfd30e9b0]
+Event: 19.908 Thread 0x00007f9e0c116000  938       3       org.fusesource.jansi.Ansi::cursorLeft (8 bytes)
+Event: 19.908 Thread 0x00007f9e0c116000 nmethod 938 0x00007f9dfd30e390 code [0x00007f9dfd30e500, 0x00007f9dfd30e688]
+Event: 19.908 Thread 0x00007f9e0c116000  939       3       org.fusesource.jansi.Ansi::cursorDown (8 bytes)
+Event: 19.908 Thread 0x00007f9e0c116000 nmethod 939 0x00007f9dfd313790 code [0x00007f9dfd313900, 0x00007f9dfd313a88]
+Event: 20.080 Thread 0x00007f9e0c116000  942       3       java.util.AbstractList::listIterator (15 bytes)
+Event: 20.080 Thread 0x00007f9e0c116000 nmethod 942 0x00007f9dfd313b10 code [0x00007f9dfd313ce0, 0x00007f9dfd314258]
+Event: 20.080 Thread 0x00007f9e0c116000  943       3       java.util.AbstractList::rangeCheckForAdd (26 bytes)
+Event: 20.084 Thread 0x00007f9e0c116000 nmethod 943 0x00007f9dfd3144d0 code [0x00007f9dfd314700, 0x00007f9dfd3153b8]
+Event: 20.084 Thread 0x00007f9e0c116000  944       3       java.util.AbstractList$ListItr::<init> (17 bytes)
+Event: 20.084 Thread 0x00007f9e0c116000 nmethod 944 0x00007f9dfd315990 code [0x00007f9dfd315b00, 0x00007f9dfd315db0]
+Event: 20.084 Thread 0x00007f9e0c116000  940       3       com.google.common.collect.AbstractIterator::hasNext (65 bytes)
+Event: 20.088 Thread 0x00007f9e0c116000 nmethod 940 0x00007f9dfd315f50 code [0x00007f9dfd316100, 0x00007f9dfd316538]
+Event: 20.088 Thread 0x00007f9e0c116000  941       3       com.google.common.base.Preconditions::checkState (13 bytes)
+Event: 20.088 Thread 0x00007f9e0c116000 nmethod 941 0x00007f9dfd316710 code [0x00007f9dfd316880, 0x00007f9dfd316aa8]
+Event: 21.406 Thread 0x00007f9e0c116000  945       3       java.nio.Buffer::hasRemaining (17 bytes)
+Event: 22.835 Thread 0x00007f9e0c116000 nmethod 945 0x00007f9dfd316b90 code [0x00007f9dfd316d00, 0x00007f9dfd316eb0]
+Event: 23.317 Thread 0x00007f9e0c116000  946       3       java.util.concurrent.locks.AbstractQueuedSynchronizer::acquire (27 bytes)
+Event: 25.176 Thread 0x00007f9e0c116000 nmethod 946 0x00007f9dfd316f10 code [0x00007f9dfd3170c0, 0x00007f9dfd317578]
+Event: 25.441 Thread 0x00007f9e0c116000  948       3       java.util.AbstractList$Itr::<init> (31 bytes)
+Event: 27.922 Thread 0x00007f9e0c116000 nmethod 948 0x00007f9dfd3176d0 code [0x00007f9dfd317840, 0x00007f9dfd317a30]
+Event: 29.511 Thread 0x00007f9e0c116000  954       3       java.util.concurrent.ThreadPoolExecutor::beforeExecute (1 bytes)
+Event: 31.227 Thread 0x00007f9e0c116000 nmethod 954 0x00007f9dfd317b10 code [0x00007f9dfd317c60, 0x00007f9dfd317db0]
+Event: 31.589 Thread 0x00007f9e0c116000  947       3       java.nio.CharBuffer::hasArray (20 bytes)
+Event: 32.603 Thread 0x00007f9e0c116000 nmethod 947 0x00007f9dfd317e10 code [0x00007f9dfd317f80, 0x00007f9dfd318170]
+Event: 32.720 Thread 0x00007f9e0c10a000  956       4       java.lang.String::getChars (62 bytes)
+Event: 32.741 Thread 0x00007f9e0c116000  955       3       java.io.BufferedOutputStream::flushBuffer (29 bytes)
+Event: 33.450 Thread 0x00007f9e0c116000 nmethod 955 0x00007f9dfd3181d0 code [0x00007f9dfd318340, 0x00007f9dfd3185a8]
+Event: 33.737 Thread 0x00007f9e0c116000  949       1       org.gradle.internal.logging.sink.GroupingProgressLogEventGenerator::access$1000 (5 bytes)
+Event: 34.879 Thread 0x00007f9e0c116000 nmethod 949 0x00007f9dfd318650 code [0x00007f9dfd3187a0, 0x00007f9dfd318890]
+Event: 35.209 Thread 0x00007f9e0c116000  960       3       org.gradle.internal.logging.events.OutputEvent::<init> (5 bytes)
+Event: 37.226 Thread 0x00007f9e0c116000 nmethod 960 0x00007f9dfd318910 code [0x00007f9dfd318a80, 0x00007f9dfd318c30]
+Event: 37.743 Thread 0x00007f9e0c116000  958       3       java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask::compareTo (9 bytes)
+Event: 38.932 Thread 0x00007f9e0c10a000 nmethod 956 0x00007f9dfd31ba50 code [0x00007f9dfd31bba0, 0x00007f9dfd31bd38]
+Event: 39.459 Thread 0x00007f9e0c10a000  961       4       java.util.ArrayList::add (29 bytes)
+Event: 39.734 Thread 0x00007f9e0c116000 nmethod 958 0x00007f9dfd31b590 code [0x00007f9dfd31b700, 0x00007f9dfd31b9a8]
+Event: 39.806 Thread 0x00007f9e0c116000  962       3       java.util.HashMap$Values::iterator (12 bytes)
+Event: 40.637 Thread 0x00007f9e0c116000 nmethod 962 0x00007f9dfd31b0d0 code [0x00007f9dfd31b240, 0x00007f9dfd31b4a8]
+Event: 40.714 Thread 0x00007f9e0c116000  970       3       java.util.concurrent.ThreadPoolExecutor$Worker::lock (6 bytes)
+Event: 43.129 Thread 0x00007f9e0c116000 nmethod 970 0x00007f9dfd31a550 code [0x00007f9dfd31a700, 0x00007f9dfd31ae88]
+Event: 43.672 Thread 0x00007f9e0c116000  969       3       java.util.concurrent.ThreadPoolExecutor::ensurePrestart (41 bytes)
+Event: 45.102 Thread 0x00007f9e0c116000 nmethod 969 0x00007f9dfd319f50 code [0x00007f9dfd31a0e0, 0x00007f9dfd31a438]
+Event: 45.196 Thread 0x00007f9e0c116000  971       3       java.util.concurrent.ThreadPoolExecutor$Worker::tryAcquire (20 bytes)
+Event: 46.536 Thread 0x00007f9e0c116000 nmethod 971 0x00007f9dfd319950 code [0x00007f9dfd319ac0, 0x00007f9dfd319e70]
+Event: 46.792 Thread 0x00007f9e0c116000  974       3       org.gradle.internal.logging.console.WorkInProgressRenderer::renderNow (357 bytes)
+Event: 51.187 Thread 0x00007f9e0c10a000 nmethod 961 0x00007f9dfd3191d0 code [0x00007f9dfd319340, 0x00007f9dfd319688]
+Event: 51.392 Thread 0x00007f9e0c10a000  973       4       java.lang.Integer::getChars (131 bytes)
+Event: 66.148 Thread 0x00007f9e0c116000 nmethod 974 0x00007f9dfd320850 code [0x00007f9dfd320ec0, 0x00007f9dfd325358]
+Event: 66.155 Thread 0x00007f9e0c10a000 nmethod 973 0x00007f9dfd31d250 code [0x00007f9dfd31d3a0, 0x00007f9dfd31d718]
+Event: 66.236 Thread 0x00007f9e0c10a000  984       4       java.lang.String::toLowerCase (439 bytes)
+Event: 66.236 Thread 0x00007f9e0c116000  983       1       java.util.concurrent.ThreadPoolExecutor::runStateOf (5 bytes)
+Event: 66.376 Thread 0x00007f9e0c116000 nmethod 983 0x00007f9dfd318f50 code [0x00007f9dfd3190a0, 0x00007f9dfd319190]
+Event: 66.443 Thread 0x00007f9e0c116000  963       3       java.util.HashMap$ValueIterator::<init> (11 bytes)
+Event: 67.622 Thread 0x00007f9e0c116000 nmethod 963 0x00007f9dfd31ce90 code [0x00007f9dfd31d000, 0x00007f9dfd31d1a8]
+Event: 67.661 Thread 0x00007f9e0c116000  989       3       org.gradle.internal.logging.console.DefaultWorkInProgressFormatter::format (109 bytes)
+Event: 67.993 Thread 0x00007f9e0c116000 nmethod 989 0x00007f9dfd31eb10 code [0x00007f9dfd31eda0, 0x00007f9dfd31ffe8]
+Event: 68.134 Thread 0x00007f9e0c116000  990       3       java.lang.Long::stringSize (38 bytes)
+Event: 68.520 Thread 0x00007f9e0c116000 nmethod 990 0x00007f9dfd31ca10 code [0x00007f9dfd31cb80, 0x00007f9dfd31cdd0]
+Event: 68.598 Thread 0x00007f9e0c116000  991       3       java.lang.Long::getChars (221 bytes)
+Event: 69.298 Thread 0x00007f9e0c116000 nmethod 991 0x00007f9dfd31db90 code [0x00007f9dfd31dd60, 0x00007f9dfd31e3b0]
+Event: 69.390 Thread 0x00007f9e0c116000  992       3       java.lang.StringBuilder::append (8 bytes)
+Event: 70.301 Thread 0x00007f9e0c116000 nmethod 992 0x00007f9dfd31c690 code [0x00007f9dfd31c800, 0x00007f9dfd31c988]
+Event: 70.551 Thread 0x00007f9e0c116000  993       3       java.lang.AbstractStringBuilder::append (70 bytes)
+Event: 71.313 Thread 0x00007f9e0c116000 nmethod 993 0x00007f9dfd327c10 code [0x00007f9dfd327e00, 0x00007f9dfd328538]
+Event: 71.328 Thread 0x00007f9e0c116000  994       1       org.gradle.internal.logging.console.DefaultRedrawableLabel::setText (6 bytes)
+Event: 71.411 Thread 0x00007f9e0c116000 nmethod 994 0x00007f9dfd31c390 code [0x00007f9dfd31c4e0, 0x00007f9dfd31c610]
+Event: 71.411 Thread 0x00007f9e0c116000  964       3       com.google.common.base.Predicates$InstanceOfPredicate::apply (9 bytes)
+Event: 71.413 Thread 0x00007f9e0c116000 nmethod 964 0x00007f9dfd31bf90 code [0x00007f9dfd31c100, 0x00007f9dfd31c2f0]
+Event: 71.413 Thread 0x00007f9e0c116000  965       3       org.gradle.internal.logging.sink.GroupingProgressLogEventGenerator::onOutput (108 bytes)
+Event: 71.419 Thread 0x00007f9e0c116000 nmethod 965 0x00007f9dfd329d50 code [0x00007f9dfd329f80, 0x00007f9dfd32ae78]
+Event: 71.419 Thread 0x00007f9e0c116000  976       3       com.google.common.collect.AbstractIterator::tryToComputeNext (36 bytes)
+Event: 71.419 Thread 0x00007f9e0c116000 nmethod 976 0x00007f9dfd32b090 code [0x00007f9dfd32b200, 0x00007f9dfd32b4e8]
+Event: 71.419 Thread 0x00007f9e0c116000  975       3       org.gradle.internal.logging.console.BuildStatusRenderer::renderNow (52 bytes)
+Event: 71.419 Thread 0x00007f9e0c116000 nmethod 975 0x00007f9dfd32b590 code [0x00007f9dfd32b760, 0x00007f9dfd32bd88]
+Event: 71.420 
